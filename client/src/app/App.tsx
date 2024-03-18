@@ -1,7 +1,12 @@
+import "./index.scss";
+
 function App() {
 	return (
-		<p>Recipe</p>
-	)
+		<>
+			<h1>Recipe</h1>
+			<p>Recipe</p>
+		</>
+	);
 }
 
-export default App
+export default App;
