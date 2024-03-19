@@ -2,10 +2,10 @@ module.exports = {
 	root: true,
 	env: {browser: true, es2020: true},
 	extends: [
-		"@feature-sliced/eslint-config",
 		'eslint:recommended',
 		'plugin:@typescript-eslint/recommended',
 		'plugin:react-hooks/recommended',
+		"@feature-sliced"
 	],
 	ignorePatterns: ['dist', '.eslintrc.cjs'],
 	parser: '@typescript-eslint/parser',
