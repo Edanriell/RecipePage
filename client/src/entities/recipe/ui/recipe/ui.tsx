@@ -1,5 +1,7 @@
 import { FC } from "react";
 
+import "./styles.scss";
+
 const Recipe: FC = () => {
 	return (
 		<article className={"recipe"}>
