@@ -1,12 +1,13 @@
 import { FC } from "react";
 
+import { Recipe } from "../entities/recipe";
+
 import "./index.scss";
 
 const App: FC = () => {
 	return (
 		<main>
-			<h1>Recipe</h1>
-			<p>Recipe</p>
+			<Recipe />
 		</main>
 	);
 };
