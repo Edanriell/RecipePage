@@ -1,13 +1,14 @@
-import {FC} from "react";
+import { FC } from "react";
 
-import {Recipe} from "@entities/recipe/ui";
+import { Recipe } from "@entities/recipe/ui";
 
-import "./index.scss";
+import "./styles/index.scss";
 
 const App: FC = () => {
 	return (
-		<main>
-			<Recipe/>
+		<main className={"recipe-page"}>
+			<h1 className={"visually-hidden"}>Recipe page</h1>
+			<Recipe />
 		</main>
 	);
 };

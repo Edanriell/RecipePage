@@ -1,1 +1,1 @@
-export * from "./recipe/ui";
+export * from "./recipe";
