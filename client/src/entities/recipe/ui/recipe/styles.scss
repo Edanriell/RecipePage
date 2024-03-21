@@ -18,6 +18,8 @@ $recipe-divider-background-color: hsl(30, 18%, 87%);
 	max-width: 73.6rem;
 	border-radius: 2.4rem;
 	padding: 4rem 4rem 2.9rem 4rem;
+	margin-left: 4rem;
+	margin-right: 4rem;
 }
 
 .recipe__title {
@@ -165,7 +167,7 @@ $recipe-divider-background-color: hsl(30, 18%, 87%);
 .recipe__instructions {
 	width: 100%;
 	background-color: $recipe-instructions-background-color;
-	margin-bottom: 2.5rem;
+	margin-bottom: 2.35rem;
 }
 
 .recipe__instructions-list {
@@ -194,7 +196,6 @@ $recipe-divider-background-color: hsl(30, 18%, 87%);
 
 .recipe__nutrition-table {
 	border-collapse: collapse;
-	margin-left: 3.2rem;
 }
 
 .recipe__nutrition-table-body {
@@ -214,6 +215,7 @@ $recipe-divider-background-color: hsl(30, 18%, 87%);
 	padding-top: 1.2rem;
 	padding-bottom: 1.1rem;
 	width: 30.4rem;
+	padding-left: 3.2rem;
 }
 
 .recipe__nutrition-table-row-value {
@@ -229,6 +231,45 @@ $recipe-divider-background-color: hsl(30, 18%, 87%);
 	margin: 0 0 2.65rem 0;
 }
 
-@media only screen and (min-width: 375px) {
-	
+@media only screen and (max-width: 376px) {
+	.recipe {
+		border-radius: 0;
+		padding: 0 0;
+		margin-left: 0;
+		margin-right: 0;
+	}
+
+	.recipe__title {
+		font-size: 3.6rem;
+	}
+
+	.recipe__title_margin-bottom_16px {
+		margin: 0 0 1.7rem 0;
+	}
+
+	.recipe__image {
+		height: 17.1rem;
+		border-radius: 0;
+	}
+
+	.recipe__preparation-time {
+		padding: 2.1rem 2.4rem 1.6rem 2.4rem;
+		margin: 0 0 2.7rem 0;
+	}
+
+	.recipe__nutrition-table {
+		margin-left: 0;
+	}
+
+	.recipe__nutrition-table-row-name {
+		width: 16.4rem;
+	}
+
+	.recipe__nutrition-table-row-value {
+		width: 14.7rem;
+	}
+
+	.recipe__container {
+		padding: 0 3.25rem 2.9rem 3.25rem;
+	}
 }
