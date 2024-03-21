@@ -186,10 +186,11 @@ $recipe-divider-background-color: hsl(30, 18%, 87%);
 
 .recipe__nutrition-table {
 	border-collapse: collapse;
-	width: 100%;
+	margin-left: 3.2rem;
 }
 
 .recipe__nutrition-table-body {
+	position: relative;
 }
 
 .recipe__nutrition-table-row {
@@ -204,11 +205,13 @@ $recipe-divider-background-color: hsl(30, 18%, 87%);
 .recipe__nutrition-table-row-name {
 	padding-top: 1.2rem;
 	padding-bottom: 1.1rem;
+	width: 30.4rem;
 }
 
 .recipe__nutrition-table-row-value {
 	padding-top: 1.2rem;
 	padding-bottom: 1.1rem;
+	width: 32rem;
 }
 
 .recipe__divider {
