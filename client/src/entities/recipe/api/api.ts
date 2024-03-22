@@ -1,3 +1,3 @@
 export const getRecipesQuery = () => {
-	return nulll;
+	return null;
 };
