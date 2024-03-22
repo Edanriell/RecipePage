@@ -1,10 +1,31 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 
+import { getRecipeQuery } from "@entities/recipe/api";
+import { TRecipe } from "@entities/recipe/model";
 import RecipeImageDesktop from "./assets/recipe-image-desktop.jpeg";
 import RecipeImageMobile from "./assets/recipe-image-mobile.jpeg";
 import "./styles.scss";
 
+type RecipeState = "notLoading" | "loading" | "loaded" | "error";
+
 const Recipe: FC = () => {
+	const [isRecipeLoading, setIsRecipeLoading] = useState<RecipeState>("notLoading");
+	const [recipeData, setRecipeData] = useState<TRecipe>();
+
+	useEffect(() => {
+		(async () => {
+			try {
+				setIsRecipeLoading("loading");
+				const data = await getRecipeQuery();
+				setIsRecipeLoading("loaded");
+				setRecipeData(data);
+			} catch (error) {
+				setIsRecipeLoading("error");
+				console.error("Error fetching data:", error);
+			}
+		})();
+	}, []);
+
 	return (
 		<article className={"recipe"}>
 			<picture>
