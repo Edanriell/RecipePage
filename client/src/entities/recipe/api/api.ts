@@ -1,1 +1,3 @@
-export const getRecipesQuery = () => {};
+export const getRecipesQuery = () => {
+	return null;
+};
