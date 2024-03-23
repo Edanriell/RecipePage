@@ -2,9 +2,11 @@ import { FC, useEffect, useState } from "react";
 
 import { getRecipeQuery } from "@entities/recipe/api";
 import { TRecipe } from "@entities/recipe/model";
+
+import "./styles.scss";
+
 import RecipeImageDesktop from "./assets/recipe-image-desktop.jpeg";
 import RecipeImageMobile from "./assets/recipe-image-mobile.jpeg";
-import "./styles.scss";
 
 type RecipeState = "notLoading" | "loading" | "loaded" | "error";
 
