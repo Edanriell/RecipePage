@@ -1,13 +1,13 @@
 import { DIContainer } from "rsdi";
 
-import { RecipesService } from "../services";
+import { RecipesRepository } from "../repositories";
 import { RecipesController } from "../controllers";
 
 type AppDIContainer = ReturnType<typeof diConfiguration>;
 
 const diConfiguration = () => {
 	return new DIContainer()
-		.add("recipesService", () => new RecipesService())
+		.add("recipesService", () => new RecipesRepository())
 		.add("recipesController", ({ recipesService }) => new RecipesController(recipesService));
 };
 

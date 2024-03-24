@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
-import { IRecipesService } from "../services";
+import { IRecipesRepository } from "../repositories";
 
 interface IRecipesController {
 	getRandomRecipe({
@@ -15,10 +15,10 @@ interface IRecipesController {
 }
 
 class RecipesController implements IRecipesController {
-	private readonly _recipesServices: IRecipesService;
+	private readonly _recipesRepository: IRecipesRepository;
 
-	public constructor(recipesService: IRecipesService) {
-		this._recipesServices = recipesService;
+	public constructor(recipesRepository: IRecipesRepository) {
+		this._recipesRepository = recipesRepository;
 	}
 
 	public async getRandomRecipe({
@@ -31,7 +31,7 @@ class RecipesController implements IRecipesController {
 		next: NextFunction;
 	}) {
 		try {
-			const recipe = await this._recipesServices.getRandomRecipe();
+			const recipe = await this._recipesRepository.getRandomRecipe();
 
 			return response.json(recipe);
 		} catch (error) {

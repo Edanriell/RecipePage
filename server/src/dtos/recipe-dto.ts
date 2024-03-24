@@ -1,3 +1,5 @@
+import { TRecipe } from "../models";
+
 class RecipeDto {
 	public id;
 	public title;
@@ -7,7 +9,7 @@ class RecipeDto {
 	public nutrition;
 	public images;
 
-	constructor(model: any) {
+	constructor(model: TRecipe) {
 		this.id = model._id;
 		this.title = model.title;
 		this.description = model.description;
