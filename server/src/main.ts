@@ -1,13 +1,16 @@
 import express, { Application, Request, Response } from "express";
-import Config from "./config/common";
 import bodyParser from "body-parser";
-import cors from "./config/cors-protection";
 import compression from "compression";
 import helmet from "helmet";
+import mongoose from "mongoose";
+
+import Config from "./config/common";
+import cors from "./config/cors-protection";
 import tooBusy from "./config/toobusy";
 import rateLimiter from "./config/rate-limiter";
 import httpsEnforcer from "./config/https-enforcer";
-import mongoose from "mongoose";
+import diConfiguration from "./config/di-container.ts";
+import routerConfiguration from "./config/router.ts";
 
 const app: Application = express();
 
@@ -19,6 +22,9 @@ app.use(helmet());
 app.use(httpsEnforcer);
 app.use(rateLimiter);
 app.use(tooBusy);
+
+const diContainer = diConfiguration();
+routerConfiguration(app, diContainer);
 
 const startServer = async () => {
 	try {
