@@ -1,7 +1,9 @@
 import helmet from "helmet";
 
-export default helmet.hsts({
+const httpsConfig = helmet.hsts({
 	maxAge: 86400,
 	includeSubDomains: true,
 	preload: true
 });
+
+export { httpsConfig };

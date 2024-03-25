@@ -4,7 +4,7 @@
 	"ecmaVersion": "latest",
 	"sourceType": "module"
   },
-  "extends": ["plugin:@typescript-eslint/recommended"],
+  "extends": ["plugin:@typescript-eslint/recommended", "plugin:security/recommended-legacy"],
   "env": {
 	"node": true
   },

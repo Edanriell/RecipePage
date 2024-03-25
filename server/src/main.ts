@@ -4,36 +4,36 @@ import compression from "compression";
 import helmet from "helmet";
 import mongoose from "mongoose";
 
-import Config from "./config/common";
-import cors from "./config/cors-protection";
-import tooBusy from "./config/toobusy";
-import rateLimiter from "./config/rate-limiter";
-import httpsEnforcer from "./config/https-enforcer";
-import diConfiguration from "./config/di-container.ts";
-import routerConfiguration from "./config/router.ts";
+import { appConfig } from "./config/common";
+import { corsConfig } from "./config/cors-protection";
+import { tooBusyConfig } from "./config/toobusy";
+import { rateLimiterConfig } from "./config/rate-limiter";
+import { httpsConfig } from "./config/https-enforcer";
+import { diConfig } from "./config/di-container";
+import { routerConfig } from "./config/router.ts";
 
 const app: Application = express();
 
-app.use(cors);
+app.use(corsConfig);
 app.use(bodyParser.json({ limit: "50kb" }));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(compression());
 app.use(helmet());
-app.use(httpsEnforcer);
-app.use(rateLimiter);
-app.use(tooBusy);
+app.use(httpsConfig);
+app.use(rateLimiterConfig);
+app.use(tooBusyConfig);
 
-const diContainer = diConfiguration();
-routerConfiguration(app, diContainer);
+const diContainer = diConfig();
+routerConfig(app, diContainer);
 
 const startServer = async () => {
 	try {
 		// await mongoose.connect(Config.dbUrl!);
 
-		app.listen(Config.port, (): void => {
-			console.log(`Connected successfully on port ${Config.port}`);
+		app.listen(appConfig.port, (): void => {
+			console.log(`Connected successfully on port ${appConfig.port}`);
 		});
-	} catch (error: any) {
+	} catch (error) {
 		console.error(`Error occured: ${error.message}`);
 	}
 };

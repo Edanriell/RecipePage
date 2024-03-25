@@ -1,22 +1,30 @@
 class ApiError extends Error {
-	status;
-	errors;
+	status: number;
+	errors: Error[];
 
-	constructor({ status, message, errors = [] }: { status: number; message: string; errors: any }) {
+	constructor({
+		status,
+		message,
+		errors = []
+	}: {
+		status: number;
+		message: string;
+		errors?: Error[];
+	}) {
 		super(message);
 		this.status = status;
 		this.errors = errors;
 	}
 
-	static BadRequest(message, errors = []) {
+	static BadRequest(message: string, errors: Error[] = []): ApiError {
 		return new ApiError({ status: 400, message, errors });
 	}
 
-	static NotFound(message, errors = []) {
+	static NotFound(message: string, errors: Error[] = []): ApiError {
 		return new ApiError({ status: 404, message, errors });
 	}
 
-	static InternalServerError(message, errors = []) {
+	static InternalServerError(message: string, errors: Error[] = []): ApiError {
 		return new ApiError({ status: 500, message, errors });
 	}
 }

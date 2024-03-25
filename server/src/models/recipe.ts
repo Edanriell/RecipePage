@@ -1,7 +1,7 @@
-import { Schema, model } from "mongoose";
+import { Schema, model, Types } from "mongoose";
 
 type TRecipe = {
-	_id: string;
+	_id: Types.ObjectId;
 	title: string;
 	description: string;
 	preparationTime: {
@@ -36,26 +36,74 @@ const recipeSchema = new Schema({
 		required: true
 	},
 	preparationTime: {
-		total: String,
-		preparation: String,
-		cooking: String
+		type: {
+			total: {
+				type: String,
+				required: true
+			},
+			preparation: {
+				type: String,
+				required: true
+			},
+			cooking: {
+				type: String,
+				required: true
+			}
+		},
+		required: true
 	},
-	ingredients: [String],
-	instructions: [
-		{
-			stepName: String,
-			stepDescription: String
-		}
-	],
+	ingredients: {
+		type: [String],
+		required: true
+	},
+	instructions: {
+		type: [
+			{
+				stepName: {
+					type: String,
+					required: true
+				},
+				stepDescription: {
+					type: String,
+					required: true
+				}
+			}
+		],
+		required: true
+	},
 	nutrition: {
-		calories: String,
-		carbs: String,
-		protein: String,
-		fat: String
+		type: {
+			calories: {
+				type: String,
+				required: true
+			},
+			carbs: {
+				type: String,
+				required: true
+			},
+			protein: {
+				type: String,
+				required: true
+			},
+			fat: {
+				type: String,
+				required: true
+			}
+		},
+		required: true
 	},
 	images: {
-		mobile: String,
-		desktop: String
+		type: {
+			mobile: {
+				type: String,
+				required: true
+			},
+			desktop: {
+				type: String,
+				required: true
+			}
+		},
+		required: true
 	}
 });
 

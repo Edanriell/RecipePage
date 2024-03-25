@@ -5,4 +5,6 @@ const corsOptions = {
 	optionsSuccessStatus: 200
 };
 
-export default cors(corsOptions);
+const corsConfig = cors(corsOptions);
+
+export { corsConfig };

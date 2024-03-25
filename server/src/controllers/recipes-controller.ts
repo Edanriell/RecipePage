@@ -1,5 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 
+import { RecipeDto } from "../dtos";
 import { IRecipesRepository } from "../repositories";
 
 interface IRecipesController {
@@ -11,7 +12,7 @@ interface IRecipesController {
 		request: Request;
 		response: Response;
 		next: NextFunction;
-	}): Promise<any>;
+	}): Promise<Response<RecipeDto> | void>;
 }
 
 class RecipesController implements IRecipesController {
