@@ -9,8 +9,8 @@ import { corsConfig } from "./config/cors-protection";
 import { tooBusyConfig } from "./config/toobusy";
 import { rateLimiterConfig } from "./config/rate-limiter";
 import { httpsConfig } from "./config/https-enforcer";
-import { diConfig } from "./config/di-container";
-import { routerConfig } from "./config/router.ts";
+import { EndpointsConfig } from "./config/endpoints.ts";
+import { errorMiddleware } from "./middlewares";
 
 const app: Application = express();
 
@@ -22,19 +22,18 @@ app.use(helmet());
 app.use(httpsConfig);
 app.use(rateLimiterConfig);
 app.use(tooBusyConfig);
-
-const diContainer = diConfig();
-routerConfig(app, diContainer);
+new EndpointsConfig(app);
+app.use(errorMiddleware);
 
 const startServer = async () => {
 	try {
 		// await mongoose.connect(Config.dbUrl!);
 
 		app.listen(appConfig.port, (): void => {
-			console.log(`Connected successfully on port ${appConfig.port}`);
+			console.log(`Server listening on port ${appConfig.port}`);
 		});
 	} catch (error) {
-		console.error(`Error occured: ${error.message}`);
+		console.error(`Error occured: ${error}`);
 	}
 };
 
