@@ -1,5 +1,6 @@
 import { Recipe } from "../models";
 import { RecipeDto } from "../dtos";
+import { ApiError } from "../exceptions";
 
 interface IRecipesRepository {
 	getRandomRecipe(): Promise<RecipeDto>;
@@ -7,17 +8,19 @@ interface IRecipesRepository {
 
 class RecipesRepository implements IRecipesRepository {
 	public async getRandomRecipe() {
-		const allRecipes = await Recipe.find();
+		const recipesCount = await Recipe.countDocuments();
 
-		const recipes: Array<RecipeDto> = [];
+		if (recipesCount === 0)
+			throw ApiError.NotFound("Did not found any recipes in database.");
 
-		for (const recipe of allRecipes) {
-			recipes.push(new RecipeDto(recipe));
-		}
+		const randomRecipeIndex = Math.floor(Math.random() * recipesCount);
 
-		const randomRecipeNumber = Math.random() * allRecipes.length;
+		const randomRecipe = await Recipe
+			.findOne()
+			.skip(randomRecipeIndex)
+			.exec();
 
-		return recipes[randomRecipeNumber];
+		return new RecipeDto(randomRecipe!);
 	}
 }
 
