@@ -3,7 +3,9 @@
 	"compilerOptions": {
 		"outDir": "dist",
 		"allowImportingTsExtensions": true,
-	  	"moduleResolution": "node"
+	  	"moduleResolution": "nodenext",
+	  	"noEmit": true,
+	  	"strict": true
 	},
 	"include": ["src"],
 	"exclude": ["node_modules"]
