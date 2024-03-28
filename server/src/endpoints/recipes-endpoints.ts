@@ -1,14 +1,14 @@
 import { Router } from "express";
 
 import { IRecipesController, RecipesController } from "../controllers";
-import { RecipesRepository } from "../repositories";
+import { RecipesService } from "../services";
 
 class RecipesEndpoints {
 	public readonly router = Router();
 	private readonly _recipesController: IRecipesController;
 
 	constructor() {
-		this._recipesController = new RecipesController(new RecipesRepository());
+		this._recipesController = new RecipesController(new RecipesService());
 		this.initializeRecipesEndpoints();
 	}
 
@@ -20,4 +20,3 @@ class RecipesEndpoints {
 const recipesEndpoints = new RecipesEndpoints().router;
 
 export { recipesEndpoints };
-

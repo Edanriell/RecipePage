@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 import { RecipeDto } from "../dtos";
-import { IRecipesRepository } from "../repositories";
+import { IRecipesRepository } from "../services";
 
 interface IRecipesController {
 	getRandomRecipe({
