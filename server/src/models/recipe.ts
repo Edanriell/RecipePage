@@ -21,8 +21,8 @@ type TRecipe = {
 		fat: string;
 	};
 	images: {
-		mobile: string;
-		desktop: string;
+		mobile: Buffer | string;
+		desktop: Buffer | string;
 	};
 };
 
@@ -37,6 +37,7 @@ const recipeSchema = new Schema({
 	},
 	preparationTime: {
 		type: {
+			_id: false,
 			total: {
 				type: String,
 				required: true
@@ -59,6 +60,7 @@ const recipeSchema = new Schema({
 	instructions: {
 		type: [
 			{
+				_id: false,
 				stepName: {
 					type: String,
 					required: true
@@ -73,6 +75,7 @@ const recipeSchema = new Schema({
 	},
 	nutrition: {
 		type: {
+			_id: false,
 			calories: {
 				type: String,
 				required: true
@@ -94,12 +97,13 @@ const recipeSchema = new Schema({
 	},
 	images: {
 		type: {
+			_id: false,
 			mobile: {
-				type: String,
+				type: Buffer,
 				required: true
 			},
 			desktop: {
-				type: String,
+				type: Buffer,
 				required: true
 			}
 		},

@@ -73,7 +73,7 @@ class RecipesService implements IRecipesService {
 	public async initializeRecipes() {
 		const isRecipesAlreadyInitialized = await Recipe.find();
 
-		if (isRecipesAlreadyInitialized) {
+		if (!isRecipesAlreadyInitialized) {
 			console.error("Recipes already exists in database.");
 			return;
 		}
