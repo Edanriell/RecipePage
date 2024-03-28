@@ -11,6 +11,7 @@ import { rateLimiterConfig } from "./config/rate-limiter";
 import { httpsConfig } from "./config/https-enforcer";
 import { EndpointsConfig } from "./config/endpoints";
 import { errorMiddleware } from "./middlewares";
+import { RecipesService } from "./services";
 
 const app: Application = express();
 
@@ -28,6 +29,8 @@ app.use(errorMiddleware);
 const startServer = async () => {
 	try {
 		await mongoose.connect(appConfig.dbUrl!);
+
+		await RecipesService.getServiceInstance().initializeRecipes();
 
 		app.listen(appConfig.port, (): void => {
 			console.log(`Server listening on port ${appConfig.port}`);

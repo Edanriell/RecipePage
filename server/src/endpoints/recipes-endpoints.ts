@@ -8,7 +8,7 @@ class RecipesEndpoints {
 	private readonly _recipesController: IRecipesController;
 
 	constructor() {
-		this._recipesController = new RecipesController(new RecipesService());
+		this._recipesController = new RecipesController(RecipesService.getServiceInstance());
 		this.initializeRecipesEndpoints();
 	}
 

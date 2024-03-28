@@ -5,14 +5,22 @@ import { Recipe } from "../models";
 import { RecipeDto } from "../dtos";
 import { ApiError } from "../exceptions";
 
-interface IRecipesRepository {
+interface IRecipesService {
 	getRandomRecipe(): Promise<RecipeDto>;
+	initializeRecipes(): void;
 }
 
 const rootFolderPath = join(__dirname, "..");
 const recipesDataFilePath = `${rootFolderPath}\\data\\recipes.json`;
 
-class RecipesService implements IRecipesRepository {
+class RecipesService implements IRecipesService {
+	private static serviceInstance: RecipesService;
+
+	public static getServiceInstance(): RecipesService {
+		if (!RecipesService.serviceInstance) RecipesService.serviceInstance = new RecipesService();
+
+		return RecipesService.serviceInstance;
+	}
 	public async getRandomRecipe() {
 		const recipesCount = await Recipe.countDocuments();
 
@@ -25,7 +33,7 @@ class RecipesService implements IRecipesRepository {
 		return new RecipeDto(randomRecipe!);
 	}
 
-	public async createNewRecipe({
+	private async createNewRecipe({
 		title,
 		description,
 		preparationTime,
@@ -102,4 +110,4 @@ class RecipesService implements IRecipesRepository {
 	}
 }
 
-export { IRecipesRepository, RecipesService };
+export { IRecipesService, RecipesService };

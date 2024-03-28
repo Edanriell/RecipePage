@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 import { RecipeDto } from "../dtos";
-import { IRecipesRepository } from "../services";
+import { IRecipesService } from "../services";
 
 interface IRecipesController {
 	getRandomRecipe({
@@ -16,9 +16,9 @@ interface IRecipesController {
 }
 
 class RecipesController implements IRecipesController {
-	private readonly _recipesRepository: IRecipesRepository;
+	private readonly _recipesRepository: IRecipesService;
 
-	public constructor(recipesRepository: IRecipesRepository) {
+	public constructor(recipesRepository: IRecipesService) {
 		this._recipesRepository = recipesRepository;
 	}
 
