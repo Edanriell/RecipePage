@@ -4,10 +4,11 @@ import { IRecipesController, RecipesController } from "../controllers";
 import { RecipesService } from "../services";
 
 class RecipesEndpoints {
-	public readonly router = Router();
+	public readonly router: Router;
 	private readonly _recipesController: IRecipesController;
 
 	constructor() {
+		this.router = Router();
 		this._recipesController = new RecipesController(RecipesService.getServiceInstance());
 		this.initializeRecipesEndpoints();
 	}

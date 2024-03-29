@@ -71,10 +71,10 @@ class RecipesService implements IRecipesService {
 	}
 
 	public async initializeRecipes() {
-		const isRecipesAlreadyInitialized = await Recipe.find();
+		const recipesInitialized = await Recipe.find();
 
-		if (isRecipesAlreadyInitialized) {
-			console.error("Recipes already exists in database.");
+		if (recipesInitialized.length > 0) {
+			console.error(`${recipesInitialized.length} recipes are already in the database.`);
 			return;
 		}
 
@@ -101,7 +101,7 @@ class RecipesService implements IRecipesService {
 					});
 				}
 
-				console.log("Successfully created recipes in database.");
+				console.log(`Successfully created ${recipesData.length} recipes in the database.`);
 			} catch (error) {
 				console.error("An error occurred while parsing JSON data: ", error);
 				throw new Error("Failed to parse JSON data.");
