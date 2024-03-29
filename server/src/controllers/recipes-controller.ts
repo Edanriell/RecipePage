@@ -16,9 +16,10 @@ class RecipesController implements IRecipesController {
 
 	public constructor(recipesService: IRecipesService) {
 		this._recipesService = recipesService;
+		this.getRandomRecipe = this.getRandomRecipe.bind(this);
 	}
 
-	public getRandomRecipe = async (request: Request, response: Response, next: NextFunction) => {
+	public async getRandomRecipe(request: Request, response: Response, next: NextFunction) {
 		try {
 			const recipe = await this._recipesService.getRandomRecipe();
 
@@ -26,7 +27,7 @@ class RecipesController implements IRecipesController {
 		} catch (error) {
 			next(error);
 		}
-	};
+	}
 }
 
 export { IRecipesController, RecipesController };
