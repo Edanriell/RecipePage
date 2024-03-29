@@ -5,8 +5,8 @@ import { TRecipe } from "@entities/recipe/model";
 
 import "./styles.scss";
 
-import RecipeImageDesktop from "./assets/recipe-image-desktop.jpeg";
-import RecipeImageMobile from "./assets/recipe-image-mobile.jpeg";
+import RecipeImageDesktop from "./assets/recipe-image-desktop.webp";
+import RecipeImageMobile from "./assets/recipe-image-mobile.webp";
 
 type RecipeState = "notLoading" | "loading" | "loaded" | "error";
 
