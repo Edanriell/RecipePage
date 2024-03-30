@@ -1,6 +1,6 @@
 # RecipePage Server
 
-To run server im development mode you must:
+To run server in development mode you must:
 - Configure .env file (Check out .env examples);
 - Start server, use command start:dev;
 
