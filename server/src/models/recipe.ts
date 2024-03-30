@@ -99,11 +99,11 @@ const recipeSchema = new Schema({
 		type: {
 			_id: false,
 			mobile: {
-				type: Buffer,
+				type: String,
 				required: true
 			},
 			desktop: {
-				type: Buffer,
+				type: String,
 				required: true
 			}
 		},

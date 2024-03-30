@@ -6,6 +6,7 @@ class RecipeDto {
 	public description;
 	public preparationTime;
 	public ingredients;
+	public instructions;
 	public nutrition;
 	public images;
 
@@ -15,6 +16,7 @@ class RecipeDto {
 		this.description = model.description;
 		this.preparationTime = model.preparationTime;
 		this.ingredients = model.ingredients;
+		this.instructions = model.instructions;
 		this.nutrition = model.nutrition;
 		this.images = model.images;
 	}

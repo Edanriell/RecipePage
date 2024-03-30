@@ -4,12 +4,12 @@
 	"description": "Recipe page server",
 	"main": "index.js",
 	"scripts": {
-		"start-dev": "nodemon",
-		"start-prod": "cross-env NODE_ENV=production ts-node src/main.ts",
-		"build": "tsc",
-		"lint": "eslint src/**/*.ts",
-		"format": "eslint src/**/*.ts --fix",
-		"pretty": "prettier --write \"src/**/*.ts\""
+		"start:dev": "nodemon",
+		"start:prod": "cross-env NODE_ENV=production ts-node src/main.ts",
+		"start:build": "tsc",
+		"start:lint": "eslint src/**/*.ts",
+		"start:format": "eslint src/**/*.ts --fix",
+		"start:pretty": "prettier --write \"src/**/*.ts\""
 	},
 	"keywords": [],
 	"author": "Edanriell",
