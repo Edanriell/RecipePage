@@ -11,7 +11,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 type RecipeState = "notLoading" | "loading" | "loaded" | "error";
 
 const Recipe: FC = () => {
-	const [reloadComponent, setReloadComponent] = useState<number>(Math.random());
+	const [, setReloadComponent] = useState<number>(Math.random());
 	const [isRecipeLoading, setIsRecipeLoading] = useState<RecipeState>("notLoading");
 	const [recipeData, setRecipeData] = useState<TRecipe>();
 
@@ -28,6 +28,10 @@ const Recipe: FC = () => {
 			}
 		})();
 	}, []);
+
+	const handleReloadButtonClick = () => {
+		setReloadComponent(Math.random());
+	};
 
 	const renderRecipe = () => (
 		<article className={"recipe"}>
@@ -327,10 +331,24 @@ const Recipe: FC = () => {
 		</article>
 	);
 
+	const renderRecipeError = () => (
+		<article className={"recipe recipe__error"}>
+			<div className={"recipe__error-container"}>
+				<h2 className={"recipe__subtitle recipe__subtitle_style_brandy-red"}>
+					Unable to load Recipe.
+				</h2>
+				<ReloadButton onButtonClick={handleReloadButtonClick} displayIcon={true}>
+					<span className={"button__text"}>Reload</span>
+				</ReloadButton>
+			</div>
+		</article>
+	);
+
 	return (
 		<>
 			{isRecipeLoading === "loading" && renderSkeleton()}
 			{isRecipeLoading === "loaded" && renderRecipe()}
+			{isRecipeLoading === "error" && renderRecipeError()}
 		</>
 	);
 };
