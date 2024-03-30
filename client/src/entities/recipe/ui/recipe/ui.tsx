@@ -1,9 +1,12 @@
 import { FC, useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 
 import { getRecipeQuery } from "@entities/recipe/api";
 import { TRecipe } from "@entities/recipe/model";
+import { Button as ReloadButton } from "@shared/ui";
 
 import "./styles.scss";
+import "react-loading-skeleton/dist/skeleton.css";
 
 import RecipeImageDesktop from "./assets/recipe-image-desktop.webp";
 import RecipeImageMobile from "./assets/recipe-image-mobile.webp";
@@ -11,6 +14,7 @@ import RecipeImageMobile from "./assets/recipe-image-mobile.webp";
 type RecipeState = "notLoading" | "loading" | "loaded" | "error";
 
 const Recipe: FC = () => {
+	const [reloadComponent, setReloadComponent] = useState<number>(Math.random());
 	const [isRecipeLoading, setIsRecipeLoading] = useState<RecipeState>("notLoading");
 	const [recipeData, setRecipeData] = useState<TRecipe>();
 
@@ -26,9 +30,9 @@ const Recipe: FC = () => {
 				console.error("Error fetching data:", error);
 			}
 		})();
-	}, []);
+	}, [reloadComponent]);
 
-	return (
+	const renderRecipe = () => (
 		<article className={"recipe"}>
 			<picture>
 				<source media="(max-width:376px)" srcSet={RecipeImageMobile} />
@@ -261,6 +265,8 @@ const Recipe: FC = () => {
 			</div>
 		</article>
 	);
+
+	return <>{isRecipeLoading === "loaded" && renderRecipe()}</>;
 };
 
 export { Recipe };
