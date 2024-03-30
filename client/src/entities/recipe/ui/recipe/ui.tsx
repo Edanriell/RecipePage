@@ -59,22 +59,24 @@ const Recipe: FC = () => {
 					</h3>
 					<ul className={"recipe__preparation-time-list"}>
 						<li className={"recipe__preparation-time-list-item"}>
-							<strong className={"recipe__paragraph recipe__paragraph_weight_700"}>Total:</strong>
 							<p className={"recipe__paragraph recipe__paragraph_margin_0px"}>
+								<strong className={"recipe__paragraph recipe__paragraph_weight_700"}>Total:</strong>
 								{recipeData?.preparationTime.total}
 							</p>
 						</li>
 						<li className={"recipe__preparation-time-list-item"}>
-							<strong className={"recipe__paragraph recipe__paragraph_weight_700"}>
-								Preparation:
-							</strong>
 							<p className={"recipe__paragraph recipe__paragraph_margin_0px"}>
+								<strong className={"recipe__paragraph recipe__paragraph_weight_700"}>
+									Preparation:
+								</strong>
 								{recipeData?.preparationTime.preparation}
 							</p>
 						</li>
 						<li className={"recipe__preparation-time-list-item"}>
-							<strong className={"recipe__paragraph recipe__paragraph_weight_700"}>Cooking:</strong>
 							<p className={"recipe__paragraph recipe__paragraph_margin_0px"}>
+								<strong className={"recipe__paragraph recipe__paragraph_weight_700"}>
+									Cooking:
+								</strong>
 								{recipeData?.preparationTime.cooking}
 							</p>
 						</li>
