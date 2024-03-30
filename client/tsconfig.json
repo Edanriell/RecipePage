@@ -22,9 +22,13 @@
 			"@app/*": ["./src/app/*"],
 			"@entities/*": ["./src/entities/*"],
 			"@entities/recipe/*": ["./src/entities/recipe/*"],
-			"@entities/recipe/ui/*": ["./src/entities/recipe/ui/*"],
 			"@entities/recipe/api/*": ["./src/entities/recipe/api/*"],
-			"@entities/recipe/model/*": ["./src/entities/recipe/model/*"]
+			"@entities/recipe/model/*": ["./src/entities/recipe/model/*"],
+			"@entities/recipe/ui/*": ["./src/entities/recipe/ui/*"],
+			"@shared/*": ["./src/shared/*"],
+			"@shared/ui/*": ["./src/shared/ui/*"],
+			"@shared/ui/button/*": ["./src/shared/ui/button/*"],
+			"@shared/ui/icon/*": ["./src/shared/ui/icon/*"],
 		}
 	},
 	"include": ["src"],
