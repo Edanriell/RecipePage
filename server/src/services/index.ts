@@ -1,1 +1,1 @@
-export * from "./recipes-service.ts";
+export * from "./recipes-service";
