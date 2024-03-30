@@ -11,7 +11,7 @@ import "react-loading-skeleton/dist/skeleton.css";
 type RecipeState = "notLoading" | "loading" | "loaded" | "error";
 
 const Recipe: FC = () => {
-	const [, setReloadComponent] = useState<number>(Math.random());
+	const [reloadComponent, setReloadComponent] = useState<number>(Math.random());
 	const [isRecipeLoading, setIsRecipeLoading] = useState<RecipeState>("notLoading");
 	const [recipeData, setRecipeData] = useState<TRecipe>();
 
@@ -27,7 +27,7 @@ const Recipe: FC = () => {
 				console.error("Error fetching data:", error);
 			}
 		})();
-	}, []);
+	}, [reloadComponent]);
 
 	const handleReloadButtonClick = () => {
 		setReloadComponent(Math.random());

@@ -1,6 +1,7 @@
 {
 	"name": "server",
-	"version": "1.0.2",
+	"private": true,
+	"version": "1.0.5",
 	"description": "Recipe page server",
 	"main": "index.js",
 	"scripts": {
@@ -11,9 +12,14 @@
 		"start:format": "eslint src/**/*.ts --fix",
 		"start:pretty": "prettier --write \"src/**/*.ts\""
 	},
-	"keywords": [],
+	"keywords": [
+		"Express",
+		"MVC",
+		"MongoDb",
+		"Mongoose"
+	],
 	"author": "Edanriell",
-	"license": "ISC",
+	"license": "MIT",
 	"dependencies": {
 		"body-parser": "^1.20.2",
 		"compression": "^1.7.4",

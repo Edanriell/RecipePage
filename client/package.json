@@ -9,6 +9,13 @@
 		"start:lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
 		"start:preview": "vite preview"
 	},
+	"keywords": [
+		"React",
+		"FSD",
+		"Gsap"
+	],
+	"author": "Edanriell",
+	"license": "MIT",
 	"dependencies": {
 		"@gsap/react": "^2.1.0",
 		"gsap": "^3.12.5",
