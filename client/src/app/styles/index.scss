@@ -6,6 +6,10 @@ html {
 	scroll-behavior: smooth;
 }
 
+body {
+	position: relative;
+}
+
 .visually-hidden {
 	position: absolute;
 	width: 1px;
