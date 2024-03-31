@@ -1,8 +1,11 @@
 import { Schema, model, Types } from "mongoose";
 
-type TRecipe = {
+type TRecipeMinimal = {
 	_id: Types.ObjectId;
 	title: string;
+};
+
+type TRecipe = TRecipeMinimal & {
 	description: string;
 	preparationTime: {
 		total: string;
@@ -113,4 +116,4 @@ const recipeSchema = new Schema({
 
 const Recipe = model("Recipe", recipeSchema);
 
-export { TRecipe, Recipe };
+export { TRecipeMinimal, TRecipe, Recipe };

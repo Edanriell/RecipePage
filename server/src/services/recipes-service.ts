@@ -2,7 +2,7 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { Recipe } from "../models";
-import { RecipeDto } from "../dtos";
+import { RecipeMinimalDto, RecipeDto } from "../dtos";
 import { ApiError } from "../exceptions";
 
 interface IRecipesService {
@@ -64,10 +64,7 @@ class RecipesService implements IRecipesService {
 			images
 		});
 
-		return {
-			id: newRecipe._id,
-			title: newRecipe.title
-		};
+		return new RecipeMinimalDto(newRecipe);
 	}
 
 	public async initializeRecipes() {
