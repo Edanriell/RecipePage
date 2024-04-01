@@ -1,2 +1,2 @@
 export * from "./recipe-dto";
-export * from "./recipe-minima-dto.ts";
+export * from "./recipe-minima-dto";

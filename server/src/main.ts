@@ -3,14 +3,18 @@ import bodyParser from "body-parser";
 import compression from "compression";
 import helmet from "helmet";
 
-import { appConfig } from "./config/common";
-import { corsConfig } from "./config/cors-protection";
-import { tooBusyConfig } from "./config/toobusy";
-import { rateLimiterConfig } from "./config/rate-limiter";
-import { httpsConfig } from "./config/https-enforcer";
-import { EndpointsConfig } from "./config/endpoints";
-import { InfoMessages, SpecialMessages, ErrorMessages } from "./config/http-logger";
-import { connectToMongoDb } from "./config/mongoDb";
+import {
+	appConfig,
+	corsConfig,
+	tooBusyConfig,
+	rateLimiterConfig,
+	httpsConfig,
+	EndpointsConfig,
+	InfoMessages,
+	SpecialMessages,
+	ErrorMessages,
+	connectToMongoDb
+} from "./config";
 import { errorMiddleware, loggerMiddleware } from "./middlewares";
 import { RecipesService, endpointsLogger, cliLogger } from "./services";
 

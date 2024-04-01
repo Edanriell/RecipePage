@@ -1,8 +1,22 @@
 import { NextFunction, Request, Response } from "express";
 
-import { endpointsLogger } from "../services";
-import { formatHTTPLoggerResponse } from "../config/http-logger";
-import { HttpMethods, SuccessMessages } from "../config/http-logger";
+import { formatHTTPLoggerResponse, HttpMethods, SuccessMessages } from "../config";
+import { endpointsLogger, dbLogger } from "../services";
+
+const getResponseMessage = (responseMethod: HttpMethods | string): string => {
+	switch (responseMethod) {
+		case HttpMethods.POST:
+			return SuccessMessages.CreateSuccess;
+		case HttpMethods.GET:
+			return SuccessMessages.GetSuccess;
+		case HttpMethods.PUT || HttpMethods.PATCH:
+			return SuccessMessages.UpdateSuccess;
+		case HttpMethods.DELETE:
+			return SuccessMessages.DeleteSuccess;
+		default:
+			return SuccessMessages.GenericSuccess;
+	}
+};
 
 const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	const requestStartTime = Date.now();
@@ -18,11 +32,16 @@ const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 					getResponseMessage(req.method),
 					formatHTTPLoggerResponse(req, res, body, requestStartTime)
 				);
+				dbLogger.info(
+					getResponseMessage(req.method),
+					formatHTTPLoggerResponse(req, res, body, requestStartTime)
+				);
 			} else {
 				endpointsLogger.error(
 					body.message,
 					formatHTTPLoggerResponse(req, res, body, requestStartTime)
 				);
+				dbLogger.error(body.message, formatHTTPLoggerResponse(req, res, body, requestStartTime));
 			}
 
 			responseSent = true;
@@ -35,18 +54,3 @@ const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 };
 
 export { loggerMiddleware };
-
-function getResponseMessage(responseMethod: HttpMethods | string): string {
-	switch (responseMethod) {
-		case HttpMethods.POST:
-			return SuccessMessages.CreateSuccess;
-		case HttpMethods.GET:
-			return SuccessMessages.GetSuccess;
-		case HttpMethods.PUT || HttpMethods.PATCH:
-			return SuccessMessages.UpdateSuccess;
-		case HttpMethods.DELETE:
-			return SuccessMessages.DeleteSuccess;
-		default:
-			return SuccessMessages.GenericSuccess;
-	}
-}

@@ -3,8 +3,7 @@ import DailyRotateFile from "winston-daily-rotate-file";
 import { randomBytes } from "crypto";
 import "winston-mongodb";
 
-import { appConfig } from "../config/common.ts";
-import { LogIndentation } from "../config/http-logger.ts";
+import { appConfig, LogIndentation } from "../config";
 
 const { combine, timestamp, colorize, json, label, printf, metadata } = winston.format;
 
