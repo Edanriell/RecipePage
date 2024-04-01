@@ -62,6 +62,19 @@ export const httpLogger = winston.createLogger({
 	]
 });
 
+// Logger for CLI outputs
+export const cliLogger = winston.createLogger({
+	format: combine(
+		label({ label: appVersion }),
+		timestamp({ format: timestampFormat }),
+		colorize({ level: true }),
+		printf(
+			({ level, message, label, timestamp }) => `[${timestamp}] ${level} (${label}): ${message}`
+		)
+	),
+	transports: [new winston.transports.Console()]
+});
+
 // Logger for MongoDB
 // export const httpLoggerDB = winston.createLogger({
 // 	// in this case we do not need to worry about logId or Timestamp as MongoDB will generate that for us
@@ -75,21 +88,3 @@ export const httpLogger = winston.createLogger({
 // 		})
 // 	]
 // });
-//
-// // Logger for CLI outputs
-// export const cliLogger = winston.createLogger({
-// 	format: combine(
-// 		label({ label: appVersion }),
-// 		timestamp({ format: timestampFormat }),
-// 		colorize({ level: true }),
-// 		printf(
-// 			({ level, message, label, timestamp }) => `[${timestamp}] ${level} (${label}): ${message}`
-// 		)
-// 	),
-// 	transports: [new winston.transports.Console()]
-// });
-
-// httpLogger.info(
-// 	getResponseMessage(req.method),
-// 	formatHTTPLoggerResponse(req, res, body, requestStartTime)
-// );

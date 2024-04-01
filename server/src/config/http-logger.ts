@@ -1,28 +1,16 @@
 import { Request, Response } from "express";
 
-enum HTTPHeaders {
+enum HttpHeaders {
 	ResponseTime = "x-response-time",
 	ForwardedFor = "x-forwarded-for"
 }
 
-enum SensitiveKeys {
-	Password = "password",
-	NewPassword = "new_password",
-	OldPassword = "old_password",
-	RepeatPassword = "repeat_password"
-}
-
-enum SpecialMessages {
-	Redacted = "*****",
-	DottedLine = ". . . . . . ."
-}
-
-type THTTPLoggerResponseData = {
-	request: THTTPLoggerRequest;
-	response: THTTPLoggerResponse;
+type THttpLoggerResponseData = {
+	request: THttpLoggerRequest;
+	response: THttpLoggerResponse;
 };
 
-interface THTTPLoggerRequest {
+type THttpLoggerRequest = {
 	headers: any;
 	host?: string;
 	baseUrl: string;
@@ -32,39 +20,51 @@ interface THTTPLoggerRequest {
 	params: any;
 	query: any;
 	clientIp?: string | string[];
-}
+};
 
-interface THTTPLoggerResponse {
+type THttpLoggerResponse = {
 	headers: any;
 	statusCode: number;
 	requestDuration: string;
 	body: any;
+};
+
+// Example of SensitiveKeys, could be anything.
+enum SensitiveKeys {
+	Password = "password",
+	NewPassword = "new_password",
+	OldPassword = "old_password",
+	RepeatPassword = "repeat_password"
+}
+
+enum SpecialMessages {
+	Sanitized = "*****"
 }
 
 const sensitiveKeysList = Object.values(SensitiveKeys) as string[];
 
 // Used to obscure senstitive information from logs, such as passwords
-const redactLogData = (data: any): any => {
+const sanitizeLogData = (data: any): any => {
 	// to avoid calling redact function on native Mongoose/MongoDB model
 	// we check if !data.constructor.name.startsWith('model')
 
 	if (typeof data === "object" && data !== null && !data.constructor.name.startsWith("model")) {
 		if (Array.isArray(data)) {
-			return data.map((item) => redactLogData(item));
+			return data.map((item) => sanitizeLogData(item));
 		}
 
-		const redactedData: any = {};
+		const sanitizedData: any = {};
 
 		for (const key in data) {
 			if (sensitiveKeysList.includes(key)) {
-				redactedData[key] = SpecialMessages.Redacted;
+				sanitizedData[key] = SpecialMessages.Sanitized;
 			} else {
 				// Recursively redact sensitive keys within nested objects
-				redactedData[key] = redactLogData(data[key]);
+				sanitizedData[key] = sanitizeLogData(data[key]);
 			}
 		}
 
-		return redactedData;
+		return sanitizedData;
 	} else {
 		return data;
 	}
@@ -75,7 +75,7 @@ const formatHTTPLoggerResponse = (
 	res: Response,
 	responseBody: any,
 	requestStartTime?: number
-): THTTPLoggerResponseData => {
+): THttpLoggerResponseData => {
 	let requestDuration = ".";
 
 	if (requestStartTime) {
@@ -93,13 +93,13 @@ const formatHTTPLoggerResponse = (
 			body: req.body,
 			params: req?.params,
 			query: req?.query,
-			clientIp: req?.headers[HTTPHeaders.ForwardedFor] ?? req?.socket.remoteAddress
+			clientIp: req?.headers[HttpHeaders.ForwardedFor] ?? req?.socket.remoteAddress
 		},
 		response: {
 			headers: res.getHeaders(),
 			statusCode: res.statusCode,
 			requestDuration,
-			body: redactLogData(responseBody)
+			body: sanitizeLogData(responseBody)
 		}
 	};
 };
