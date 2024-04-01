@@ -10,7 +10,7 @@ import { tooBusyConfig } from "./config/toobusy";
 import { rateLimiterConfig } from "./config/rate-limiter";
 import { httpsConfig } from "./config/https-enforcer";
 import { EndpointsConfig } from "./config/endpoints";
-import { errorMiddleware } from "./middlewares";
+import { errorMiddleware, loggerMiddleware } from "./middlewares";
 import { RecipesService } from "./services";
 
 const app: Application = express();
@@ -23,6 +23,7 @@ app.use(helmet());
 app.use(httpsConfig);
 app.use(rateLimiterConfig);
 app.use(tooBusyConfig);
+app.use(loggerMiddleware);
 new EndpointsConfig(app);
 app.use(errorMiddleware);
 

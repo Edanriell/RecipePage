@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { Recipe } from "../models";
 import { RecipeMinimalDto, RecipeDto } from "../dtos";
 import { ApiError } from "../exceptions";
+import { httpLogger } from "./logger-service.ts";
 
 interface IRecipesService {
 	getRandomRecipe(): Promise<RecipeDto>;
@@ -29,6 +30,8 @@ class RecipesService implements IRecipesService {
 		const randomRecipeIndex = Math.floor(Math.random() * recipesCount);
 
 		const randomRecipe = await Recipe.findOne().skip(randomRecipeIndex).exec();
+
+		// httpLogger.info("Some message", { greetings: "Hello" });
 
 		return new RecipeDto(randomRecipe!);
 	}
