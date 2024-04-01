@@ -5,6 +5,54 @@ enum HttpHeaders {
 	ForwardedFor = "x-forwarded-for"
 }
 
+enum HTTPMethods {
+	HEAD = "HEAD",
+	GET = "GET",
+	POST = "POST",
+	PATCH = "PATCH",
+	PUT = "PUT",
+	DELETE = "DELETE"
+}
+
+enum LogIndentation {
+	None = 0,
+	SM = 2, // Small
+	MD = 4, // Medium
+	LG = 6, // Large
+	XL = 8, // XLarge
+	XXL = 10,
+	XXXL = 12
+}
+
+enum SuccessMessages {
+	CreateSuccess = "Resource created successfully",
+	GetSuccess = "Resource retrieved successfully",
+	UpdateSuccess = "Resource updated successfully",
+	DeleteSuccess = "Resource deleted successfully",
+	GenericSuccess = "Operation completed successfully"
+}
+
+enum SpecialMessages {
+	Sanitized = "*****",
+	DottedLine = ". . . . . . . ."
+}
+
+enum InfoMessages {
+	DatabasesConnected = "Databases connected successfully!"
+}
+
+enum ErrorMessages {
+	AppStartupFail = "Unable to start the app!",
+	CreateFail = "Unable to save entry to DB!",
+	GetFail = "Unable to retrieve data from DB!",
+	UpdateFail = "Unable to update data in DB!",
+	DeleteFail = "Unable to delete entry from DB!",
+	DuplicateEntryFail = "User already exists!",
+	PasswordMismatchFail = "Passwords must match!",
+	Generic = "Something went wrong!",
+	NotFound = "Unable to find the requested resource!"
+}
+
 type THttpLoggerResponseData = {
 	request: THttpLoggerRequest;
 	response: THttpLoggerResponse;
@@ -37,13 +85,9 @@ enum SensitiveKeys {
 	RepeatPassword = "repeat_password"
 }
 
-enum SpecialMessages {
-	Sanitized = "*****"
-}
-
 const sensitiveKeysList = Object.values(SensitiveKeys) as string[];
 
-// Used to obscure senstitive information from logs, such as passwords
+// Used to obscure sensitive information from logs, such as passwords
 const sanitizeLogData = (data: any): any => {
 	// to avoid calling redact function on native Mongoose/MongoDB model
 	// we check if !data.constructor.name.startsWith('model')
@@ -104,4 +148,12 @@ const formatHTTPLoggerResponse = (
 	};
 };
 
-export { formatHTTPLoggerResponse };
+export {
+	formatHTTPLoggerResponse,
+	SpecialMessages,
+	HTTPMethods,
+	LogIndentation,
+	SuccessMessages,
+	InfoMessages,
+	ErrorMessages
+};

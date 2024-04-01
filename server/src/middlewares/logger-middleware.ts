@@ -1,23 +1,7 @@
 import { NextFunction, Request, Response } from "express";
-import { httpLogger } from "../services/logger-service.ts";
-import { formatHTTPLoggerResponse } from "../config/http-logger.ts";
 
-export enum HTTPMethods {
-	HEAD = "HEAD",
-	GET = "GET",
-	POST = "POST",
-	PATCH = "PATCH",
-	PUT = "PUT",
-	DELETE = "DELETE"
-}
-
-export enum SuccessMessages {
-	CreateSuccess = "Resource created successfully",
-	GetSuccess = "Resource retrieved successfully",
-	UpdateSuccess = "Resource updated successfully",
-	DeleteSuccess = "Resource deleted successfully",
-	GenericSuccess = "Operation completed successfully"
-}
+import { httpLogger } from "../services";
+import { formatHTTPLoggerResponse } from "../config/http-logger";
 
 const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	const requestStartTime = Date.now();

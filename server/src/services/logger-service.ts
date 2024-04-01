@@ -1,16 +1,7 @@
 import winston from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
 import { randomBytes } from "crypto";
-
-enum LogIndentation {
-	None = 0,
-	SM = 2, // Small
-	MD = 4, // Medium
-	LG = 6, // Large
-	XL = 8, // XLarge
-	XXL = 10,
-	XXXL = 12
-}
+import { LogIndentation } from "../config/http-logger.ts";
 
 const { combine, timestamp, colorize, json, label, printf, metadata } = winston.format;
 
@@ -20,7 +11,7 @@ const appVersion = process.env.npm_package_version;
 const generateLogId = (): string => randomBytes(16).toString("hex");
 
 // Logger for API endpoints
-export const httpLogger = winston.createLogger({
+const httpLogger = winston.createLogger({
 	format: combine(
 		timestamp({ format: timestampFormat }),
 		json(),
@@ -63,7 +54,7 @@ export const httpLogger = winston.createLogger({
 });
 
 // Logger for CLI outputs
-export const cliLogger = winston.createLogger({
+const cliLogger = winston.createLogger({
 	format: combine(
 		label({ label: appVersion }),
 		timestamp({ format: timestampFormat }),
@@ -88,3 +79,5 @@ export const cliLogger = winston.createLogger({
 // 		})
 // 	]
 // });
+
+export { httpLogger, cliLogger };
