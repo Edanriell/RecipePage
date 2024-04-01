@@ -5,7 +5,7 @@ enum HttpHeaders {
 	ForwardedFor = "x-forwarded-for"
 }
 
-enum HTTPMethods {
+enum HttpMethods {
 	HEAD = "HEAD",
 	GET = "GET",
 	POST = "POST",
@@ -151,7 +151,7 @@ const formatHTTPLoggerResponse = (
 export {
 	formatHTTPLoggerResponse,
 	SpecialMessages,
-	HTTPMethods,
+	HttpMethods,
 	LogIndentation,
 	SuccessMessages,
 	InfoMessages,

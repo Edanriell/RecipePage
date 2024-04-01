@@ -9,10 +9,10 @@ import { tooBusyConfig } from "./config/toobusy";
 import { rateLimiterConfig } from "./config/rate-limiter";
 import { httpsConfig } from "./config/https-enforcer";
 import { EndpointsConfig } from "./config/endpoints";
-import { InfoMessages, SpecialMessages, ErrorMessages } from "./config/http-logger.ts";
+import { InfoMessages, SpecialMessages, ErrorMessages } from "./config/http-logger";
 import { connectToMongoDb } from "./config/mongoDb";
 import { errorMiddleware, loggerMiddleware } from "./middlewares";
-import { RecipesService, httpLogger, cliLogger } from "./services";
+import { RecipesService, endpointsLogger, cliLogger } from "./services";
 
 const app: Application = express();
 
@@ -44,7 +44,7 @@ const startServer = async () => {
 		});
 	} catch (error: unknown) {
 		cliLogger.error("Server startup failed! ❌");
-		httpLogger.error(ErrorMessages.AppStartupFail, { error });
+		endpointsLogger.error(ErrorMessages.AppStartupFail, { error });
 	}
 };
 

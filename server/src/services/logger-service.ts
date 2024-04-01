@@ -1,6 +1,9 @@
 import winston from "winston";
 import DailyRotateFile from "winston-daily-rotate-file";
 import { randomBytes } from "crypto";
+import "winston-mongodb";
+
+import { appConfig } from "../config/common.ts";
 import { LogIndentation } from "../config/http-logger.ts";
 
 const { combine, timestamp, colorize, json, label, printf, metadata } = winston.format;
@@ -11,7 +14,7 @@ const appVersion = process.env.npm_package_version;
 const generateLogId = (): string => randomBytes(16).toString("hex");
 
 // Logger for API endpoints
-const httpLogger = winston.createLogger({
+const endpointsLogger = winston.createLogger({
 	format: combine(
 		timestamp({ format: timestampFormat }),
 		json(),
@@ -67,17 +70,17 @@ const cliLogger = winston.createLogger({
 });
 
 // Logger for MongoDB
-// export const httpLoggerDB = winston.createLogger({
-// 	// in this case we do not need to worry about logId or Timestamp as MongoDB will generate that for us
-// 	// the req, res data will be stored to "meta" object via metadata()
-// 	format: combine(json(), metadata()),
-// 	transports: [
-// 		new winston.transports.MongoDB({
-// 			db: process.env.MONGODB_URI as string,
-// 			collection: "logs", // name of the table/collection where you want to store your logs
-// 			options: { useUnifiedTopology: true } // some stuff that CLI complains about
-// 		})
-// 	]
-// });
+const dbLogger = winston.createLogger({
+	// in this case we do not need to worry about logId or Timestamp as MongoDB will generate that for us
+	// the req, res data will be stored to "meta" object via metadata()
+	format: combine(json(), metadata()),
+	transports: [
+		new winston.transports.MongoDB({
+			db: String(appConfig.dbUrl),
+			collection: "logs", // name of the table/collection where you want to store your logs
+			options: { useUnifiedTopology: true } // some stuff that CLI complains about
+		})
+	]
+});
 
-export { httpLogger, cliLogger };
+export { endpointsLogger, cliLogger, dbLogger };

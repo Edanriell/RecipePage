@@ -1,7 +1,8 @@
 import { NextFunction, Request, Response } from "express";
 
-import { httpLogger } from "../services";
+import { endpointsLogger } from "../services";
 import { formatHTTPLoggerResponse } from "../config/http-logger";
+import { HttpMethods, SuccessMessages } from "../config/http-logger";
 
 const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	const requestStartTime = Date.now();
@@ -13,12 +14,15 @@ const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 	res.send = function (body: any): Response {
 		if (!responseSent) {
 			if (res.statusCode < 400) {
-				httpLogger.info(
+				endpointsLogger.info(
 					getResponseMessage(req.method),
 					formatHTTPLoggerResponse(req, res, body, requestStartTime)
 				);
 			} else {
-				httpLogger.error(body.message, formatHTTPLoggerResponse(req, res, body, requestStartTime));
+				endpointsLogger.error(
+					body.message,
+					formatHTTPLoggerResponse(req, res, body, requestStartTime)
+				);
 			}
 
 			responseSent = true;
@@ -32,15 +36,15 @@ const loggerMiddleware = (req: Request, res: Response, next: NextFunction) => {
 
 export { loggerMiddleware };
 
-function getResponseMessage(responseMethod: HTTPMethods | string): string {
+function getResponseMessage(responseMethod: HttpMethods | string): string {
 	switch (responseMethod) {
-		case HTTPMethods.POST:
+		case HttpMethods.POST:
 			return SuccessMessages.CreateSuccess;
-		case HTTPMethods.GET:
+		case HttpMethods.GET:
 			return SuccessMessages.GetSuccess;
-		case HTTPMethods.PUT || HTTPMethods.PATCH:
+		case HttpMethods.PUT || HttpMethods.PATCH:
 			return SuccessMessages.UpdateSuccess;
-		case HTTPMethods.DELETE:
+		case HttpMethods.DELETE:
 			return SuccessMessages.DeleteSuccess;
 		default:
 			return SuccessMessages.GenericSuccess;
