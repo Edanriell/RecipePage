@@ -8,7 +8,7 @@ import { appConfig, LogIndentation } from "../config";
 const { combine, timestamp, colorize, json, label, printf, metadata } = winston.format;
 
 const timestampFormat = "MMM-DD-YYYY HH:mm:ss";
-const appVersion = process.env.npm_package_version;
+const appVersion = process.env.npm_package_version ?? appConfig.packageVersion;
 
 const generateLogId = (): string => randomBytes(16).toString("hex");
 
