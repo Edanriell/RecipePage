@@ -36,9 +36,11 @@ const startServer = async () => {
 	try {
 		await Promise.all([connectToMongoDb()]);
 
+		cliLogger.info(InfoMessages.DatabasesConnected);
+		cliLogger.info(SpecialMessages.DottedLine);
+
 		await RecipesService.getServiceInstance().initializeRecipes();
 
-		cliLogger.info(InfoMessages.DatabasesConnected);
 		cliLogger.info(SpecialMessages.DottedLine);
 
 		const PORT = Number(appConfig.port);

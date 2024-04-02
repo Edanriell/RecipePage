@@ -4,6 +4,7 @@ import * as fs from "fs";
 import { Recipe } from "../models";
 import { RecipeMinimalDto, RecipeDto } from "../dtos";
 import { ApiError } from "../exceptions";
+import { cliLogger } from "./logger-service";
 
 interface IRecipesService {
 	getRandomRecipe(): Promise<RecipeDto>;
@@ -71,7 +72,7 @@ class RecipesService implements IRecipesService {
 		const recipesInitialized = await Recipe.find();
 
 		if (recipesInitialized.length > 0) {
-			console.error(`${recipesInitialized.length} recipes are already in the database.`);
+			cliLogger.info(`${recipesInitialized.length} recipes are found in database.`);
 			return;
 		}
 
@@ -98,7 +99,7 @@ class RecipesService implements IRecipesService {
 					});
 				}
 
-				console.log(`Successfully created ${recipesData.length} recipes in the database.`);
+				cliLogger.info(`Successfully created ${recipesData.length} recipes in the database.`);
 			} catch (error) {
 				console.error("An error occurred while parsing JSON data: ", error);
 				throw new Error("Failed to parse JSON data.");

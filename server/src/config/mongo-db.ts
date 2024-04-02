@@ -1,6 +1,6 @@
 import { connect } from "mongoose";
 
-import { appConfig } from "./common.ts";
+import { appConfig } from "./common";
 
 // import mongoose, { connect } from 'mongoose';
 // mongoose.set('debug', true); // <--- Enables debug logs

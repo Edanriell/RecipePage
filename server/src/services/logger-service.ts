@@ -25,7 +25,7 @@ const endpointsLogger = winston.createLogger({
 				appInfo: {
 					appVersion,
 					environment: process.env.NODE_ENV, // development/staging/production
-					proccessId: process.pid
+					processId: process.pid
 				},
 				message,
 				data
@@ -38,7 +38,7 @@ const endpointsLogger = winston.createLogger({
 		// log to console
 		new winston.transports.Console({
 			// if set to true, logs will not appear
-			silent: process.env.NODE_ENV === "test_env" // true/false
+			silent: appConfig.isEndpointLogsSilenced === "Silenced" // true/false
 		}),
 		// log to file
 		new winston.transports.File({
