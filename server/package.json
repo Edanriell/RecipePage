@@ -1,7 +1,7 @@
 {
 	"name": "server",
 	"private": true,
-	"version": "1.0.6",
+	"version": "1.0.7",
 	"description": "Recipe page server",
 	"main": "index.js",
 	"scripts": {
