@@ -5,18 +5,18 @@ import helmet from "helmet";
 
 import {
 	appConfig,
+	connectToMongoDb,
 	corsConfig,
-	tooBusyConfig,
-	rateLimiterConfig,
-	httpsConfig,
 	EndpointsConfig,
-	InfoMessages,
-	SpecialMessages,
 	ErrorMessages,
-	connectToMongoDb
+	httpsConfig,
+	InfoMessages,
+	rateLimiterConfig,
+	SpecialMessages,
+	tooBusyConfig
 } from "./config";
 import { errorMiddleware, loggerMiddleware } from "./middlewares";
-import { RecipesService, endpointsLogger, cliLogger } from "./services";
+import { cliLogger, endpointsLogger, RecipesService } from "./services";
 
 const app: Application = express();
 

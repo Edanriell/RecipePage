@@ -4,7 +4,7 @@ import { recipesEndpoints } from "../endpoints";
 
 class EndpointsConfig {
 	constructor(app: Application) {
-		app.use("/api", recipesEndpoints)
+		app.use("/api", recipesEndpoints);
 	}
 }
 

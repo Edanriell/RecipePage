@@ -2,7 +2,7 @@ import { FC } from "react";
 
 import { Recipe } from "@entities/recipe/ui";
 
-import "./styles/index.scss";
+import "./styles/styles.scss";
 
 const App: FC = () => {
 	return (

@@ -1,1 +1,1 @@
-export { Recipe } from "./ui.tsx";
+export { Recipe } from "./ui";

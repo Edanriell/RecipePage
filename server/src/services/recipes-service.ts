@@ -2,7 +2,7 @@ import { join } from "path";
 import * as fs from "fs";
 
 import { Recipe } from "../models";
-import { RecipeMinimalDto, RecipeDto } from "../dtos";
+import { RecipeDto, RecipeMinimalDto } from "../dtos";
 import { ApiError } from "../exceptions";
 import { cliLogger } from "./logger-service";
 

@@ -1,6 +1,6 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { FC, useRef, ButtonHTMLAttributes } from "react";
+import { ButtonHTMLAttributes, FC, useRef } from "react";
 
 import { Icon } from "@shared/ui";
 
@@ -55,10 +55,12 @@ const Button: FC<ButtonProps> = ({ onButtonClick, displayIcon = false, children,
 
 			const handleButtonTouchStart = contextSafe(() => {
 				animateButton(0.9, "hsl(332, 51%, 28%)");
+				animateRefreshIcon();
 			});
 
 			const handleButtonTouchEnd = contextSafe(() => {
 				animateButton(1.1, "hsl(332, 51%, 28%)");
+				stopRefreshIconAnimation();
 			});
 
 			const handleButtonMouseDown = contextSafe(() => {

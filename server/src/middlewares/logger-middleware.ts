@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 
 import { formatHTTPLoggerResponse, HttpMethods, SuccessMessages } from "../config";
-import { endpointsLogger, dbLogger } from "../services";
+import { dbLogger, endpointsLogger } from "../services";
 
 const getResponseMessage = (responseMethod: HttpMethods | string): string => {
 	switch (responseMethod) {

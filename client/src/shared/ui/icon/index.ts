@@ -1,1 +1,1 @@
-export { Icon } from "./ui.tsx";
+export { Icon } from "./ui";

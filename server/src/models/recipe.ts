@@ -1,4 +1,4 @@
-import { Schema, model, Types } from "mongoose";
+import { model, Schema, Types } from "mongoose";
 
 type TRecipeMinimal = {
 	_id: Types.ObjectId;
